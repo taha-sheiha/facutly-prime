@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Faculty Prime</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="لوحة تحكم أنظمة Faculty Prime - مبادرة طلابية في كلية التجارة جامعة كفر الشيخ">
+    <meta name="keywords" content="Faculty Prime, لوحة تحكم, كلية التجارة, جامعة كفر الشيخ">
+    <meta name="author" content="Faculty Prime">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link rel="apple-touch-icon" href="./logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Dashboard Specific Styles */
+        .dashboard-container {
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            border: 2px solid transparent;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: headerFadeIn 1s ease forwards;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            border-radius: 20px;
+            z-index: -1;
+            animation: rainbowBg 8s ease-in-out infinite;
+        }
+
+        @keyframes headerFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            animation: rainbowBg 4s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(162, 155, 254, 0.3);
+        }
+
+        .header-text h1 {
+            font-family: var(--font-secondary);
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 3s ease-in-out infinite;
+            margin-bottom: 5px;
+        }
+
+        .header-text p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .logout-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, rgba(255, 59, 48, 0.8), rgba(255, 69, 58, 0.8));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 59, 48, 0.4);
+        }
+
+        .logout-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .home-btn {
+            padding: 12px 20px;
+            background: rgba(42, 42, 66, 0.8);
+            color: var(--text-primary);
+            border: 2px solid rgba(162, 155, 254, 0.3);
+            border-radius: 12px;
+            font-family: var(--font-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .home-btn:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(162, 155, 254, 0.3);
+        }
+
+        .home-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .system-card {
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid transparent;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: systemCardEntrance 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .system-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: rainbowBg 6s ease-in-out infinite;
+        }
+
+        .system-card:hover::before {
+            opacity: 1;
+        }
+
+        .system-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 50px rgba(162, 155, 254, 0.4);
+        }
+
+        @keyframes systemCardEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) rotateX(20deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .system-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: iconPulse 3s ease-in-out infinite, rainbowBg 4s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(162, 155, 254, 0.3);
+        }
+
+        .system-icon svg {
+            width: 35px;
+            height: 35px;
+            color: white;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+        }
+
+        .system-title {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .system-card:hover .system-title {
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 2s ease-in-out infinite;
+        }
+
+        .system-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .system-button {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: rainbowBg 5s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .system-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .system-button:hover::before {
+            left: 100%;
+        }
+
+        .system-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .system-button svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .system-button:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(26, 26, 46, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid rgba(162, 155, 254, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(162, 155, 254, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 4s ease-in-out infinite;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 15px;
+            }
+
+            .dashboard-header {
+                padding: 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .systems-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .system-card {
+                padding: 25px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header {
+                padding: 15px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .logout-btn,
+            .home-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .system-card {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation delays for system cards */
+        .system-card:nth-child(1) { animation-delay: 0.1s; }
+        .system-card:nth-child(2) { animation-delay: 0.2s; }
+        .system-card:nth-child(3) { animation-delay: 0.3s; }
+        .system-card:nth-child(4) { animation-delay: 0.4s; }
+        .system-card:nth-child(5) { animation-delay: 0.5s; }
+        .system-card:nth-child(6) { animation-delay: 0.6s; }
+        .system-card:nth-child(7) { animation-delay: 0.7s; }
+        .system-card:nth-child(8) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Dashboard Container -->
+    <div class="container dashboard-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="header-content">
+                <div class="header-info">
+                    <div class="header-avatar" id="userAvatar">
+                        A
+                    </div>
+                    <div class="header-text">
+                        <h1>مرحباً، <span id="userName">المستخدم</span></h1>
+                        <p>لوحة تحكم أنظمة Faculty Prime</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <a href="index.html" class="home-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                        الصفحة الرئيسية
+                    </a>
+                    <button class="logout-btn" onclick="logout()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSystems">8</div>
+                    <div class="stat-label">إجمالي الأنظمة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="activeUsers">156</div>
+                    <div class="stat-label">المستخدمين النشطين</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalQuizzes">42</div>
+                    <div class="stat-label">إجمالي الكويزات</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalSheets">28</div>
+                    <div class="stat-label">إجمالي الشيتات</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Systems Grid -->
+        <div class="systems-grid">
+            <!-- نظام المحاضرات -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام المحاضرات</h3>
+                <p class="system-description">إدارة وتنظيم المحاضرات والمواد الدراسية لجميع الفرق والأقسام</p>
+                <button class="system-button" onclick="openSystem('lectures')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- نظام السكاشن -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام السكاشن</h3>
+                <p class="system-description">تنظيم وإدارة جلسات السكاشن والمراجعات للطلاب</p>
+                <button class="system-button" onclick="openSystem('sections')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- نظام إعلان كويز -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام إعلان كويز</h3>
+                <p class="system-description">إنشاء وإدارة إعلانات الكويزات والامتحانات القصيرة</p>
+                <button class="system-button" onclick="openSystem('quiz-announcements')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- نظام إعلان شيت -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام إعلان شيت</h3>
+                <p class="system-description">إنشاء وإدارة إعلانات الشيتات والمواد التعليمية</p>
+                <button class="system-button" onclick="openSystem('sheet-announcements')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- نظام كويزات مجمعة -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4"/>
+                        <path d="M9 7V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3"/>
+                        <line x1="8" y1="15" x2="16" y2="15"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام كويزات مجمعة</h3>
+                <p class="system-description">مجموعة شاملة من الكويزات والاختبارات لجميع المواد</p>
+                <button class="system-button" onclick="openSystem('quiz-collection')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- نظام شيتات مجمعة -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام شيتات مجمعة</h3>
+                <p class="system-description">مكتبة شاملة من الشيتات والملخصات لجميع المواد الدراسية</p>
+                <button class="system-button" onclick="openSystem('sheet-collection')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- نظام اقتراب الكويز -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام اقتراب الكويز</h3>
+                <p class="system-description">تنبيهات وإشعارات للكويزات والامتحانات القادمة</p>
+                <button class="system-button" onclick="openSystem('quiz-reminders')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- نظام التقارير -->
+            <div class="system-card">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
+                <h3 class="system-title">نظام التقارير</h3>
+                <p class="system-description">تقارير شاملة عن الأداء والإحصائيات والتحليلات</p>
+                <button class="system-button" onclick="openSystem('reports')">
+                    <span>الدخول للنظام</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // System URLs mapping
+        const systemUrls = {
+            'lectures': 'lectures.html',
+            'sections': 'sections.html',
+            'quiz-announcements': 'quiz-announcements.html',
+            'sheet-announcements': 'sheet-announcements.html',
+            'quiz-collection': 'quiz-collection.html',
+            'sheet-collection': 'sheet-collection.html',
+            'quiz-reminders': 'quiz-reminders.html',
+            'reports': 'reports.html'
+        };
+
+        // Check authentication on page load
+        window.addEventListener('load', function() {
+            const loggedInUser = sessionStorage.getItem('facultyPrimeUser');
+            if (!loggedInUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Set user info
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+            
+            userName.textContent = getUserDisplayName(loggedInUser);
+            userAvatar.textContent = loggedInUser.charAt(0).toUpperCase();
+
+            // Initialize dashboard
+            initializeDashboard();
+        });
+
+        // Get user display name
+        function getUserDisplayName(username) {
+            return username;
+        }
+
+        // Initialize dashboard with animations and data
+        function initializeDashboard() {
+            // Animate stats
+            animateStats();
+            
+            // Initialize particle system for desktop
+            if (window.innerWidth > 768) {
+                new ParticleSystem();
+            }
+        }
+
+        // Animate statistics numbers
+        function animateStats() {
+            const stats = [
+                { id: 'totalSystems', target: 8 },
+                { id: 'activeUsers', target: 156 },
+                { id: 'totalQuizzes', target: 42 },
+                { id: 'totalSheets', target: 28 }
+            ];
+
+            stats.forEach(stat => {
+                const element = document.getElementById(stat.id);
+                let current = 0;
+                const increment = stat.target / 50;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current);
+                }, 50);
+            });
+        }
+
+        // Open system
+        function openSystem(systemKey) {
+            const url = systemUrls[systemKey];
+            if (url) {
+                // Add loading animation to button
+                const button = event.target.closest('.system-button');
+                const originalText = button.innerHTML;
+                
+                button.innerHTML = `
+                    <div style="width: 20px; height: 20px; border: 2px solid transparent; border-top: 2px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px;"></div>
+                    <span>جاري التحميل...</span>
+                `;
+                button.disabled = true;
+
+                // Simulate loading and redirect
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 1000);
+            } else {
+                showNotification('هذا النظام قيد التطوير حالياً', 'info');
+            }
+        }
+
+        // Logout function
+        function logout() {
+            // Show confirmation
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                // Clear session
+                sessionStorage.removeItem('facultyPrimeUser');
+                sessionStorage.removeItem('loginTime');
+                
+                // Show logout message
+                showNotification('تم تسجيل الخروج بنجاح', 'success');
+                
+                // Redirect to login page
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+            }
+        }
+
+        // Enhanced notification function
+        function showNotification(message, type = 'info', duration = 3000) {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            
+            const icon = getNotificationIcon(type);
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <div class="notification-icon">${icon}</div>
+                    <span class="notification-message">${message}</span>
+                    <button class="notification-close" onclick="closeNotification(this)">×</button>
+                </div>
+                <div class="notification-progress"></div>
+            `;
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, rgba(26, 26, 46, 0.95), rgba(42, 42, 66, 0.95));
+                color: white;
+                padding: 20px;
+                border-radius: 15px;
+                border: 2px solid var(--neon-purple);
+                box-shadow: 0 15px 40px rgba(162, 155, 254, 0.4);
+                z-index: 1000;
+                backdrop-filter: blur(15px);
+                animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                max-width: 350px;
+                font-family: var(--font-primary);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Progress bar
+            const progressBar = notification.querySelector('.notification-progress');
+            progressBar.style.cssText = `
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 3px;
+                background: var(--gradient-rainbow);
+                border-radius: 0 0 15px 15px;
+                animation: progressBar ${duration}ms linear;
+            `;
+            
+            // Auto remove
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    closeNotification(notification.querySelector('.notification-close'));
+                }
+            }, duration);
+        }
+
+        function getNotificationIcon(type) {
+            const icons = {
+                info: '💡',
+                success: '✅',
+                warning: '⚠️',
+                error: '❌'
+            };
+            return icons[type] || icons.info;
+        }
+
+        function closeNotification(button) {
+            const notification = button.closest('.notification');
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+
+        // Session timeout check
+        setInterval(() => {
+            const loginTime = sessionStorage.getItem('loginTime');
+            if (loginTime) {
+                const now = new Date();
+                const login = new Date(loginTime);
+                const diffHours = (now - login) / (1000 * 60 * 60);
+                
+                // Auto logout after 8 hours
+                if (diffHours > 8) {
+                    showNotification('انتهت صلاحية الجلسة، سيتم تسجيل الخروج تلقائياً', 'warning');
+                    setTimeout(logout, 3000);
+                }
+            }
+        }, 60000); // Check every minute
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'h':
+                        e.preventDefault();
+                        window.location.href = 'index.html';
+                        break;
+                    case 'q':
+                        e.preventDefault();
+                        logout();
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

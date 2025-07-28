@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جاري التحويل...</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .redirect-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .redirect-card {
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            border: 2px solid transparent;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(162, 155, 254, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: loginCardEntrance 1s ease forwards;
+        }
+
+        .redirect-logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--primary-dark), var(--primary-dark)) padding-box,
+                        var(--gradient-rainbow) border-box;
+            animation: logoEnhanced 4s ease-in-out infinite;
+        }
+
+        .redirect-title {
+            font-family: var(--font-secondary);
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 3s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        .redirect-message {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .countdown {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px rgba(116, 185, 255, 0.7);
+            margin-bottom: 30px;
+        }
+
+        .progress-bar-container {
+            width: 80%;
+            height: 10px;
+            background: rgba(162, 155, 254, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            border-radius: 5px;
+            animation: rainbowBg 3s ease-in-out infinite;
+        }
+
+        .cancel-button {
+            padding: 10px 25px;
+            background: rgba(255, 59, 48, 0.2);
+            border: 2px solid rgba(255, 59, 48, 0.5);
+            border-radius: 50px;
+            color: #ff3b30;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-button:hover {
+            background: rgba(255, 59, 48, 0.4);
+            box-shadow: 0 0 15px rgba(255, 59, 48, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <div class="redirect-container">
+        <div class="redirect-card">
+            <img src="./logo_circular.png" alt="Faculty Prime Logo" class="redirect-logo">
+            <h1 class="redirect-title">جاري التحويل إلى الجروب...</h1>
+            <p class="redirect-message">سيتم تحويلك تلقائياً خلال <span id="countdown">5</span> ثوانٍ.</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <button class="cancel-button" onclick="window.history.back()">إلغاء والعودة</button>
+        </div>
+    </div>
+
+    <script>
+        const countdownElement = document.getElementById('countdown');
+        const progressBar = document.getElementById('progressBar');
+        let countdown = 5;
+        let redirectUrl = '';
+
+        // Get redirect URL from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('url')) {
+            redirectUrl = decodeURIComponent(urlParams.get('url'));
+        } else {
+            // Fallback if no URL is provided
+            redirectUrl = 'index.html'; 
+        }
+
+        const interval = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            progressBar.style.width = ((5 - countdown) / 5) * 100 + '%';
+
+            if (countdown <= 0) {
+                clearInterval(interval);
+                window.location.href = redirectUrl;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
+

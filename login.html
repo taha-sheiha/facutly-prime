@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Faculty Prime</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="تسجيل الدخول لأنظمة Faculty Prime - مبادرة طلابية في كلية التجارة جامعة كفر الشيخ">
+    <meta name="keywords" content="Faculty Prime, تسجيل دخول, كلية التجارة, جامعة كفر الشيخ">
+    <meta name="author" content="Faculty Prime">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link rel="apple-touch-icon" href="./logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Login Page Specific Styles */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .login-card {
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border: 2px solid transparent;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(162, 155, 254, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: loginCardEntrance 1s ease forwards;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            border-radius: 25px;
+            z-index: -1;
+            animation: rainbowBg 6s ease-in-out infinite;
+        }
+
+        @keyframes loginCardEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--primary-dark), var(--primary-dark)) padding-box,
+                        var(--gradient-rainbow) border-box;
+            animation: logoEnhanced 4s ease-in-out infinite;
+        }
+
+        .login-title {
+            font-family: var(--font-secondary);
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbowText 3s ease-in-out infinite;
+            margin-bottom: 10px;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--neon-purple);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        .back-link:hover {
+            background: rgba(162, 155, 254, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(42, 42, 66, 0.8);
+            border: 2px solid rgba(162, 155, 254, 0.3);
+            border-radius: 15px;
+            color: var(--text-primary);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(162, 155, 254, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .password-toggle {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--neon-purple);
+            background: rgba(162, 155, 254, 0.1);
+        }
+
+        .password-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 18px 25px;
+            background: var(--gradient-rainbow);
+            background-size: 400% 400%;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: rainbowBg 5s ease-in-out infinite;
+            margin-top: 10px;
+        }
+
+        .login-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .login-button:hover::before {
+            left: 100%;
+        }
+
+        .login-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(162, 155, 254, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .login-button:active {
+            transform: translateY(-1px);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, rgba(255, 59, 48, 0.2), rgba(255, 69, 58, 0.2));
+            border: 2px solid rgba(255, 59, 48, 0.5);
+            color: #ff3b30;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 15px;
+            animation: errorShake 0.5s ease;
+            display: none;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-card {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+
+            .login-title {
+                font-size: 1.8rem;
+            }
+
+            .form-input {
+                padding: 12px 15px;
+            }
+
+            .login-button {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .login-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Additional animations for enhanced experience */
+        .form-group {
+            animation: formGroupFadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.2s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+        .form-group:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes formGroupFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="./logo_circular.png" alt="Faculty Prime Logo" class="login-logo">
+                <h1 class="login-title">تسجيل الدخول</h1>
+                <p class="login-subtitle">الدخول لأنظمة التيم</p>
+                <a href="index.html" class="back-link" style="color: white;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    العودة للصفحة الرئيسية
+                </a>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">اسم المستخدم</label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            class="form-input" 
+                            placeholder="أدخل اسم المستخدم"
+                            required
+                            autocomplete="username"
+                            style="color: var(--text-primary);"
+                        >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">كلمة المرور</label>
+                    <div style="position: relative;">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="form-input" 
+                            placeholder="أدخل كلمة المرور"
+                            required
+                            autocomplete="current-password"
+                            style="padding-left: 50px; color: var(--text-primary);"
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                            <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="login-button" id="loginButton">
+                        <div class="loading-spinner" id="loadingSpinner"></div>
+                        <span id="buttonText">تسجيل الدخول</span>
+                    </button>
+                </div>
+
+                <div class="error-message" id="errorMessage"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Login functionality
+        const loginForm = document.getElementById('loginForm');
+        const loginButton = document.getElementById('loginButton');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const buttonText = document.getElementById('buttonText');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Credentials (في التطبيق الحقيقي، يجب أن تكون هذه البيانات محمية)
+        const validCredentials = {
+            'user1': 'pass1',
+            'user2': 'pass2',
+            'user3': 'pass3',
+            'user4': 'pass4',
+            'user5': 'pass5',
+            'user6': 'pass6',
+            'user7': 'pass7',
+            'user8': 'pass8',
+            'user9': 'pass9',
+            'user10': 'pass10',
+            'user11': 'pass11',
+            'user12': 'pass12',
+            'user13': 'pass13',
+            'user14': 'pass14',
+            'user15': 'pass15',
+            'user16': 'pass16',
+            'user17': 'pass17',
+            'user18': 'pass18',
+            'user19': 'pass19',
+            'user20': 'pass20',
+            'user21': 'pass21',
+            'user22': 'pass22',
+            'user23': 'pass23',
+            'user24': 'pass24',
+            'user25': 'pass25',
+            'user26': 'pass26',
+            'user27': 'pass27',
+            'user28': 'pass28',
+            'user29': 'pass29',
+            'user30': 'pass30'
+        };
+
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                `;
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Handle form submission
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Validate inputs
+            if (!username || !password) {
+                showError('يرجى إدخال اسم المستخدم وكلمة المرور');
+                return;
+            }
+
+            // Show loading state
+            loginButton.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+            buttonText.textContent = 'جاري تسجيل الدخول...';
+
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Check credentials
+            if (validCredentials[username] && validCredentials[username] === password) {
+                // Success - store session and redirect
+                sessionStorage.setItem('facultyPrimeUser', username);
+                sessionStorage.setItem('loginTime', new Date().toISOString());
+                
+                // Show success message
+                buttonText.textContent = 'تم تسجيل الدخول بنجاح!';
+                loginButton.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
+                
+                // Redirect to dashboard
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                // Error
+                showError('اسم المستخدم أو كلمة المرور غير صحيحة');
+                
+                // Reset button state
+                loginButton.disabled = false;
+                loadingSpinner.style.display = 'none';
+                buttonText.textContent = 'تسجيل الدخول';
+            }
+        });
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            const loggedInUser = sessionStorage.getItem('facultyPrimeUser');
+            if (loggedInUser) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        // Enhanced keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+                const inputs = Array.from(document.querySelectorAll('.form-input'));
+                const currentIndex = inputs.indexOf(e.target);
+                
+                if (currentIndex < inputs.length - 1) {
+                    inputs[currentIndex + 1].focus();
+                } else {
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+
+        // Auto-focus first input
+        setTimeout(() => {
+            document.getElementById('username').focus();
+        }, 500);
+    </script>
+</body>
+</html>
+

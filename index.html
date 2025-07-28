@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Prime - مبادرة طلابية | كلية التجارة جامعة كفر الشيخ</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Faculty Prime - مبادرة طلابية رائدة في كلية التجارة جامعة كفر الشيخ. انضم إلى جروبات الفرق الدراسية للمحاسبة، إدارة الأعمال، الاقتصاد، والإحصاء.">
+    <meta name="keywords" content="Faculty Prime, كلية التجارة, جامعة كفر الشيخ, مبادرة طلابية, محاسبة, إدارة أعمال, اقتصاد, إحصاء, جروبات طلابية">
+    <meta name="author" content="Faculty Prime">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Faculty Prime - مبادرة طلابية | كلية التجارة جامعة كفر الشيخ">
+    <meta property="og:description" content="انضم إلى مبادرة Faculty Prime الطلابية في كلية التجارة جامعة كفر الشيخ. جروبات تعليمية للفرق الدراسية والأقسام المختلفة.">
+    <meta property="og:image" content="./logo.png">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_EG">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Faculty Prime - مبادرة طلابية">
+    <meta name="twitter:description" content="انضم إلى مبادرة Faculty Prime الطلابية في كلية التجارة جامعة كفر الشيخ">
+    <meta name="twitter:image" content="./logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./logo.png">
+    <link rel="apple-touch-icon" href="./logo.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Faculty Prime",
+        "description": "مبادرة طلابية في كلية التجارة جامعة كفر الشيخ",
+        "url": "",
+        "logo": "./logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "كفر الشيخ",
+            "addressCountry": "مصر"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "student organization"
+        }
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <img src="./logo_circular.png" alt="Faculty Prime Logo" class="loading-logo">
+            <h2 class="loading-title">Faculty Prime</h2>
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            <p class="loading-text" id="loadingText">جاري التحميل...</p>
+            <div class="loading-percentage">0%</div>
+        </div>
+    </div>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="./logo_circular.png" alt="Faculty Prime Logo" class="logo">
+                <h1 class="main-title">Faculty Prime</h1>
+                <p class="subtitle">مبادرة طلابية رائدة في كلية التجارة - جامعة كفر الشيخ</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Academic Years Section -->
+            <section class="section">
+                <h2 class="section-title">الفرق الدراسية</h2>
+                <div class="cards-grid">
+                    <div class="card year-card" data-year="1">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <span class="year-number">1</span>
+                            </div>
+                            <h3 class="card-title">الفرقة الأولى</h3>
+                            <p class="card-description">انضم إلى جروب الفرقة الأولى للحصول على المواد الدراسية والتواصل مع زملائك</p>
+                            <button class="card-button" onclick="openGroup('first-year')">
+                                <span>انضم للجروب</span>
+                                <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card year-card" data-year="2">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <span class="year-number">2</span>
+                            </div>
+                            <h3 class="card-title">الفرقة الثانية</h3>
+                            <p class="card-description">انضم إلى جروب الفرقة الثانية للحصول على المواد الدراسية والتواصل مع زملائك</p>
+                            <button class="card-button" onclick="openGroup('second-year')">
+                                <span>انضم للجروب</span>
+                                <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card year-card disabled" data-year="3">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <span class="year-number">3</span>
+                            </div>
+                            <h3 class="card-title">الفرقة الثالثة</h3>
+                            <p class="card-description">لم يتم تجهيز المجتمع بعد</p>
+                            <div class="coming-soon">
+                                <span>قريباً</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card year-card" data-year="4">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <span class="year-number">4</span>
+                            </div>
+                            <h3 class="card-title">الفرقة الرابعة</h3>
+                            <p class="card-description">اختر قسمك الأكاديمي للانضمام إلى المجتمع المناسب</p>
+                            
+                            <!-- Departments under 4th year -->
+                            <div class="departments-grid">
+                                <button class="department-button" onclick="openGroup('accounting')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                        <polyline points="14,2 14,8 20,8"/>
+                                        <line x1="16" y1="13" x2="8" y2="13"/>
+                                        <line x1="16" y1="17" x2="8" y2="17"/>
+                                        <polyline points="10,9 9,9 8,9"/>
+                                    </svg>
+                                    <span>المحاسبة</span>
+                                </button>
+                                
+                                <button class="department-button" onclick="openGroup('business')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                        <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                    </svg>
+                                    <span>إدارة الأعمال</span>
+                                </button>
+                                
+                                <button class="department-button" onclick="openGroup('economics')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                    <span>الاقتصاد</span>
+                                </button>
+                                
+                                <button class="department-button" onclick="openGroup('statistics')">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <line x1="18" y1="20" x2="18" y2="10"/>
+                                        <line x1="12" y1="20" x2="12" y2="4"/>
+                                        <line x1="6" y1="20" x2="6" y2="14"/>
+                                    </svg>
+                                    <span>الإحصاء</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card year-card">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">الموقع الرسمي للمبادرة</h3>
+                            <p class="card-description">تفضل بزيارة موقعنا الرسمي للمزيد من المعلومات والأخبار</p>
+                            <button class="card-button" onclick="window.open('https://www.facultyprime.com', '_blank')">
+                                <span>زيارة الموقع</span>
+                                <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card team-login-card">
+                        <div class="card-content">
+                            <div class="card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                                    <polyline points="10 17 15 12 10 7"/>
+                                    <line x1="15" y1="12" x2="3" y2="12"/>
+                                </svg>
+                            </div>
+                            <h3 class="card-title">الدخول لأنظمة التيم</h3>
+                            <p class="card-description" style="color: #ffcc00; font-weight: bold;">تحذير: هذه الأنظمة مخصصة للمسؤولين فقط.</p>
+                            <p class="card-description">سجل الدخول للوصول إلى لوحة تحكم الفريق والأنظمة المخصصة.</p>
+                            <button class="card-button" onclick="window.location.href='login.html'">
+                                <span>تسجيل الدخول</span>
+                                <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Faculty Prime - جميع الحقوق محفوظة</p>
+            <p>مبادرة طلابية في كلية التجارة - جامعة كفر الشيخ</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+
