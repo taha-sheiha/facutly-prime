@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع المبادرة - قيد التطوير</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #00000a;
+            --bg-medium: #0a0a1a;
+            --accent-neon-blue: #00e6ff;
+            --accent-neon-purple: #a020f0;
+            --text-light: #e0e0e0;
+            --text-muted: #8888aa;
+            --border-glow: #00e6ff;
+            --shadow-strong: rgba(0, 230, 255, 0.8);
+            --shadow-light: rgba(0, 230, 255, 0.3);
+            --gradient-cyber: linear-gradient(45deg, var(--accent-neon-blue), var(--accent-neon-purple));
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            line-height: 1.6;
+            perspective: 1000px;
+        }
+
+        /* --- Background Animations --- */
+        .background-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, var(--bg-medium) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--bg-medium) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.2;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .particle-system {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--accent-neon-blue);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleMove 20s infinite linear;
+            box-shadow: 0 0 10px var(--accent-neon-blue);
+        }
+
+        .particle:nth-child(1) { width: 4px; height: 4px; top: 15%; left: 25%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 5px; height: 5px; top: 55%; left: 85%; animation-delay: 4s; }
+        .particle:nth-child(3) { width: 3px; height: 3px; top: 85%; left: 45%; animation-delay: 8s; }
+        .particle:nth-child(4) { width: 6px; height: 6px; top: 35%; left: 15%; animation-delay: 12s; }
+        .particle:nth-child(5) { width: 4px; height: 4px; top: 75%; left: 65%; animation-delay: 16s; }
+        .particle:nth-child(6) { width: 5px; height: 5px; top: 20%; left: 90%; animation-delay: 2s; }
+        .particle:nth-child(7) { width: 3px; height: 3px; top: 90%; left: 10%; animation-delay: 6s; }
+        .particle:nth-child(8) { width: 6px; height: 6px; top: 60%; left: 30%; animation-delay: 10s; }
+        .particle:nth-child(9) { width: 4px; height: 4px; top: 40%; left: 70%; animation-delay: 14s; }
+        .particle:nth-child(10) { width: 5px; height: 5px; top: 5%; left: 50%; animation-delay: 18s; }
+
+        @keyframes particleMove {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: scale(1); }
+            90% { opacity: 1; transform: scale(1); }
+            100% { transform: translate(100vw, 100vh) scale(0.5); opacity: 0; }
+        }
+
+        .scanline-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent 0px,
+                transparent 1px,
+                rgba(0, 0, 0, 0.1) 1px,
+                rgba(0, 0, 0, 0.1) 2px
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            background-color: rgba(10, 10, 26, 0.98);
+            padding: 70px 90px;
+            border-radius: 25px;
+            box-shadow: 0 30px 80px var(--shadow-strong);
+            max-width: 1000px;
+            width: 90%;
+            position: relative;
+            z-index: 3;
+            border: 4px solid var(--border-glow);
+            animation: containerEntrance 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            transform: rotateX(5deg) rotateY(-5deg);
+        }
+
+        .main-content::before {
+            content: ">";
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.8em;
+            color: var(--accent-neon-blue);
+            opacity: 0.8;
+            animation: glitchEffect 1s infinite alternate;
+        }
+
+        .main-content::after {
+            content: "_";
+            position: absolute;
+            bottom: 25px;
+            right: 30px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.8em;
+            color: var(--accent-neon-blue);
+            opacity: 0.8;
+            animation: glitchEffect 1.2s infinite alternate;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5.5em;
+            color: var(--accent-neon-blue);
+            margin-bottom: 25px;
+            font-weight: 900;
+            text-shadow: 0 0 40px var(--accent-neon-blue), 0 0 80px var(--shadow-strong);
+            animation: neonGlow 2s infinite alternate, slideInDown 1.2s ease-out;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+            transform: translateZ(50px);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 6px;
+            background: var(--gradient-cyber);
+            animation: underlinePulse 2.5s infinite alternate;
+            box-shadow: 0 0 20px var(--accent-neon-blue);
+        }
+
+        p {
+            font-size: 1.6em;
+            margin-bottom: 50px;
+            color: var(--text-muted);
+            animation: fadeIn 2.5s ease-out;
+            max-width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+            transform: translateZ(30px);
+        }
+
+        .loader-spinner {
+            border: 15px solid rgba(255, 255, 255, 0.1);
+            border-top: 15px solid var(--accent-neon-blue);
+            border-right: 15px solid var(--accent-neon-purple);
+            border-bottom: 15px solid var(--accent-neon-blue);
+            border-left: 15px solid var(--accent-neon-purple);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+            margin: 0 auto 60px;
+            box-shadow: 0 0 50px var(--shadow-strong);
+            position: relative;
+            transform: translateZ(40px);
+        }
+
+        .loader-spinner::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-cyber);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-neon-blue);
+        }
+
+        .social-icons {
+            margin-top: 70px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            animation: fadeIn 3s ease-out;
+            transform: translateZ(20px);
+        }
+
+        .social-icon {
+            color: var(--text-light);
+            font-size: 4em;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.5s ease, text-shadow 0.5s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--gradient-cyber);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) translateZ(-1px);
+            opacity: 0;
+            transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        .social-icon:hover::before {
+            width: 130%;
+            height: 130%;
+            opacity: 0.3;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-15px) scale(1.25) rotateX(10deg);
+            color: var(--accent-neon-blue);
+            text-shadow: 0 0 30px var(--accent-neon-blue), 0 0 60px var(--shadow-strong);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-120px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes neonGlow {
+            0% { text-shadow: 0 0 40px var(--accent-neon-blue), 0 0 80px var(--shadow-strong); }
+            50% { text-shadow: 0 0 50px var(--accent-neon-blue), 0 0 100px var(--shadow-strong); }
+            100% { text-shadow: 0 0 40px var(--accent-neon-blue), 0 0 80px var(--shadow-strong); }
+        }
+
+        @keyframes underlinePulse {
+            0% { transform: translateX(-50%) scaleX(0.7); opacity: 0.8; }
+            50% { transform: translateX(-50%) scaleX(1.05); opacity: 1; }
+            100% { transform: translateX(-50%) scaleX(0.7); opacity: 0.8; }
+        }
+
+        @keyframes containerEntrance {
+            0% { opacity: 0; transform: scale(0.6) translateY(150px) rotateX(20deg); }
+            100% { opacity: 1; transform: scale(1) translateY(0) rotateX(0deg); }
+        }
+
+        @keyframes glitchEffect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 50px 60px;
+            }
+            h1 {
+                font-size: 4em;
+            }
+            p {
+                font-size: 1.3em;
+            }
+            .social-icon {
+                font-size: 3.2em;
+            }
+            .loader-spinner {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 40px 30px;
+            }
+            h1 {
+                font-size: 3em;
+            }
+            p {
+                font-size: 1.1em;
+            }
+            .social-icon {
+                font-size: 2.5em;
+            }
+            .loader-spinner {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="background-effect">
+        <div class="grid-overlay"></div>
+        <div class="particle-system">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <canvas id="matrixCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></canvas>
+    </div>
+    <div class="main-content">
+        <div class="loader-spinner"></div>
+        <h1>موقع المبادرة قيد التطوير</h1>
+        <p>نحن نعمل بجد لإطلاق موقعنا الرسمي قريبًا بتصميم وميزات ثورية. ترقبوا تجربة لا مثيل لها!</p>
+        <div class="contact-info">
+            <p>للاستفسارات أو لمتابعة آخر الأخبار، يرجى التواصل معنا عبر:</p>
+        </div>
+        <div class="social-icons">
+            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social-icon" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:info@yourinitiative.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        const matrixCanvas = document.getElementById('matrixCanvas');
+        const ctx = matrixCanvas.getContext('2d');
+
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+
+        const katakana = 'アァカサタナハマヤャラワガザダバパハバビブベボカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const chars = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = matrixCanvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 10, 0.05)'; // Fades the previous frames
+            ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+            ctx.fillStyle = '#00e6ff'; // Neon blue color
+            ctx.font = fontSize + 'px Share Tech Mono';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35); // Adjust speed
+
+        window.addEventListener('resize', () => {
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+            const newColumns = matrixCanvas.width / fontSize;
+            for (let x = drops.length; x < newColumns; x++) {
+                drops[x] = 1;
+            }
+            drops.length = newColumns;
+        });
+    </script>
+</body>
+</html>
+
+
